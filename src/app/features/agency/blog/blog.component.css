@@ -1,0 +1,14 @@
+.active-btn {
+  background-color: #0ff !important;
+  color: #000 !important;
+  border-color: #0ff !important;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+}
+
+.category-btn {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.category-btn:hover:not(.active-btn) {
+  transform: translateY(-2px);
+}
