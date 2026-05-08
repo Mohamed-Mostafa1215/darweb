@@ -4,13 +4,13 @@ export const routes: Routes = [
   // Redirect root to agency home
   {
     path: '',
-    redirectTo: 'agency/home',
+    redirectTo: 'home',
     pathMatch: 'full',
   },
 
   // Agency Landing Pages
   {
-    path: 'agency',
+    path: '',
     loadComponent: () =>
       import('./shared/layouts/agency-layout/agency-layout.component').then(
         (c) => c.AgencyLayoutComponent,
@@ -63,6 +63,12 @@ export const routes: Routes = [
           import('./features/agency/blog-post/blog-post.component').then((c) => c.BlogPostComponent)
       },
       {
+        path: 'demo',
+        loadComponent: () =>
+          import('./features/agency/demo/chameleon-demo.component').then((c) => c.ChameleonDemoComponent),
+        data: { title: 'السحر التقني | جرب النظام الخاص بك - DarWeb', description: 'شاهد تجربة حية لكيف سيبدو النظام الخاص بمشروعك.' }
+      },
+      {
         path: '**',
         loadComponent: () =>
           import('./features/agency/not-found/not-found.component').then((c) => c.NotFoundComponent),
@@ -74,6 +80,6 @@ export const routes: Routes = [
   // Wildcard route (404)
   {
     path: '**',
-    redirectTo: 'agency/home',
+    redirectTo: 'home',
   },
 ];

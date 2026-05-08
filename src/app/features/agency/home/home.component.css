@@ -182,8 +182,12 @@
 :host-context(.light) [class~="text-white"] { color: #1a202c !important; }
 :host-context(.light) [class~="text-gray-400"] { color: #64748b !important; }
 :host-context(.light) [class~="text-gray-500"] { color: #94a3b8 !important; }
-:host-context(.light) [class~="bg-[#0b1b21]"] { background-color: #fff !important; }
-:host-context(.light) [class~="bg-[#071318]"] { background-color: #f1f5f9 !important; }
+:host-context(.light) [class~="bg-[#0b1b21]"],
+:host-context(.light) [class~="bg-[#0b1b21]/60"],
+:host-context(.light) [class~="bg-[#0b1b21]/80"] { background-color: #fff !important; }
+:host-context(.light) [class~="bg-[#071318]"],
+:host-context(.light) [class~="bg-[#071318]/60"],
+:host-context(.light) [class~="bg-[#071318]/80"] { background-color: #f8fafc !important; }
 :host-context(.light) [class~="border-[#1e3a47]"] { border-color: #cbd5e1 !important; }
 :host-context(.light) [class~="text-[#0ff]"] { color: #0891b2 !important; }
 :host-context(.light) [class~="bg-[#0ff]"] { background-color: #0891b2 !important; }

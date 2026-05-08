@@ -1,0 +1,134 @@
+<div class="loss-calc-wrapper" dir="rtl">
+
+  <!-- Header -->
+  <div class="text-center mb-12">
+    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-red-500/40 bg-red-500/5 text-red-400 text-sm font-medium mb-5">
+      <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+      تشخيص مجاني — بدون تسجيل
+    </div>
+    <h2 class="text-4xl md:text-5xl font-extrabold text-white tracking-tight mb-4">
+      كم تخسر شهرياً<br>
+      <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-orange-300 to-red-400">
+        بسبب غياب النظام الرقمي؟
+      </span>
+    </h2>
+    <p class="text-gray-400 text-lg max-w-xl mx-auto">
+      حرّك السلايدرات وشوف خسائرك الحقيقية في الوقت الفعلي
+    </p>
+  </div>
+
+  <!-- Calculator Card -->
+  <div class="calc-card">
+
+    <!-- Sliders -->
+    <div class="sliders-section">
+
+      <!-- Slider 1: Daily Customers -->
+      <div class="slider-group">
+        <div class="slider-label">
+          <span class="slider-icon">👥</span>
+          <span class="slider-title">عدد العملاء يومياً</span>
+          <span class="slider-value">{{ dailyCustomers() }}</span>
+        </div>
+        <input
+          type="range" min="10" max="500" step="5"
+          [value]="dailyCustomers()"
+          (input)="onSliderChange('dailyCustomers', $any($event.target).value)"
+          class="neon-slider"
+          id="slider-customers">
+        <div class="slider-minmax">
+          <span>10</span><span>500</span>
+        </div>
+      </div>
+
+      <!-- Slider 2: Average Order Value -->
+      <div class="slider-group">
+        <div class="slider-label">
+          <span class="slider-icon">🛒</span>
+          <span class="slider-title">متوسط قيمة الطلب</span>
+          <span class="slider-value">{{ formatNumber(avgOrderValue()) }} ج.م</span>
+        </div>
+        <input
+          type="range" min="100" max="10000" step="100"
+          [value]="avgOrderValue()"
+          (input)="onSliderChange('avgOrderValue', $any($event.target).value)"
+          class="neon-slider"
+          id="slider-order">
+        <div class="slider-minmax">
+          <span>100 ج.م</span><span>10,000 ج.م</span>
+        </div>
+      </div>
+
+      <!-- Slider 3: Churn Rate -->
+      <div class="slider-group">
+        <div class="slider-label">
+          <span class="slider-icon">📉</span>
+          <span class="slider-title">العملاء اللي ما بيرجعوش</span>
+          <span class="slider-value">{{ churnRate() }}%</span>
+        </div>
+        <input
+          type="range" min="10" max="90" step="5"
+          [value]="churnRate()"
+          (input)="onSliderChange('churnRate', $any($event.target).value)"
+          class="neon-slider churn-slider"
+          id="slider-churn">
+        <div class="slider-minmax">
+          <span>10%</span><span>90%</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Divider -->
+    <div class="calc-divider">
+      <span>النتيجة</span>
+    </div>
+
+    <!-- Result Section -->
+    <div class="result-section">
+
+      <!-- Main Loss Number -->
+      <div class="result-main">
+        <div class="result-label">أنت تخسر تقريباً كل شهر</div>
+        <div class="result-number loss-number">
+          {{ formatNumber(monthlyLoss()) }}
+          <span class="result-currency">ج.م</span>
+        </div>
+        <div class="result-yearly">
+          أي ما يعادل
+          <strong class="text-red-400">{{ formatNumber(yearlyLoss()) }} ج.م</strong>
+          سنوياً
+        </div>
+      </div>
+
+      <!-- Package Recommendation -->
+      <div class="recommendation-card">
+        <div class="rec-header">
+          <span class="rec-icon">{{ recommendedPackage().icon }}</span>
+          <span class="rec-label">الحل الأمثل لحالتك</span>
+        </div>
+        <div class="rec-package-name">{{ recommendedPackage().name }}</div>
+        <div class="rec-price">{{ recommendedPackage().price }}</div>
+        <div class="rec-setup">
+          <svg class="w-4 h-4 text-green-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+          </svg>
+          ابدأ اليوم بـ {{ recommendedPackage().setup }} ج.م فقط — الباقي عند التسليم
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CTA Button -->
+    <button
+      id="cta-to-demo"
+      (click)="onScrollToDemo()"
+      class="cta-btn-full">
+      <span>🎮 جرّب النظام بإيدك الآن — بدون تسجيل</span>
+      <svg class="w-6 h-6 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+      </svg>
+    </button>
+
+  </div>
+</div>

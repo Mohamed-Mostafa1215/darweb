@@ -83,7 +83,7 @@
   >
     <!-- Logo -->
     <a
-      routerLink="/agency/home"
+      routerLink="/home"
       class="flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0ff] rounded-lg"
       aria-label="DarWeb - Go to homepage"
     >
@@ -102,26 +102,32 @@
       aria-label="Main navigation"
     >
       <a
-        routerLink="/agency/home"
+        routerLink="/home"
         routerLinkActive="nav-active"
         [routerLinkActiveOptions]="{ exact: true }"
         class="nav-link transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0ff] rounded px-2 py-1"
         >الرئيسية</a
       >
       <a
-        routerLink="/agency/projects"
+        routerLink="/projects"
         routerLinkActive="nav-active"
         class="nav-link transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0ff] rounded px-2 py-1"
         >سابقة الأعمال</a
       >
       <a
-        routerLink="/agency/blog"
+        routerLink="/demo"
+        routerLinkActive="nav-active"
+        class="nav-link transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0ff] rounded px-2 py-1"
+        >جرب النظام</a
+      >
+      <a
+        routerLink="/blog"
         routerLinkActive="nav-active"
         class="nav-link transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0ff] rounded px-2 py-1"
         >المدونة</a
       >
       <a
-        routerLink="/agency/testimonials"
+        routerLink="/testimonials"
         routerLinkActive="nav-active"
         class="nav-link transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0ff] rounded px-2 py-1"
         >آراء العملاء</a
@@ -131,7 +137,7 @@
     <!-- CTA & Theme Toggle & Mobile Menu -->
     <div class="flex items-center gap-4 md:gap-6">
       <a
-        routerLink="/agency/contact"
+        routerLink="/contact"
         class="cta-btn px-6 py-2 rounded-full font-semibold text-sm hover:scale-105 transition-transform hidden sm:inline-flex focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0ff] focus-visible:ring-offset-2 focus-visible:ring-offset-[#030b0e]"
       >
         تواصل معنا
@@ -193,7 +199,7 @@
       aria-label="Mobile navigation"
     >
       <a
-        routerLink="/agency/home"
+        routerLink="/home"
         routerLinkActive="nav-active"
         [routerLinkActiveOptions]="{ exact: true }"
         (click)="mobileMenuOpen = false"
@@ -201,28 +207,35 @@
         >الرئيسية</a
       >
       <a
-        routerLink="/agency/projects"
+        routerLink="/projects"
         routerLinkActive="nav-active"
         (click)="mobileMenuOpen = false"
         class="nav-link py-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0ff] rounded"
         >سابقة الأعمال</a
       >
       <a
-        routerLink="/agency/blog"
+        routerLink="/demo"
+        routerLinkActive="nav-active"
+        (click)="mobileMenuOpen = false"
+        class="nav-link py-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0ff] rounded"
+        >جرب النظام</a
+      >
+      <a
+        routerLink="/blog"
         routerLinkActive="nav-active"
         (click)="mobileMenuOpen = false"
         class="nav-link py-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0ff] rounded"
         >المدونة</a
       >
       <a
-        routerLink="/agency/testimonials"
+        routerLink="/testimonials"
         routerLinkActive="nav-active"
         (click)="mobileMenuOpen = false"
         class="nav-link py-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0ff] rounded"
         >آراء العملاء</a
       >
       <a
-        routerLink="/agency/contact"
+        routerLink="/contact"
         (click)="mobileMenuOpen = false"
         class="cta-btn px-6 py-2.5 rounded-full font-semibold text-sm text-center hover:scale-105 transition-transform mt-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0ff] focus-visible:ring-offset-2 focus-visible:ring-offset-[#030b0e]"
         >تواصل معنا</a
@@ -280,28 +293,28 @@
       <ul class="space-y-2 text-xs">
         <li>
           <a
-            routerLink="/agency/home"
+            routerLink="/home"
             class="footer-link transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0ff] rounded"
             >الرئيسية</a
           >
         </li>
         <li>
           <a
-            routerLink="/agency/projects"
+            routerLink="/projects"
             class="footer-link transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0ff] rounded"
             >أعمالنا</a
           >
         </li>
         <li>
           <a
-            routerLink="/agency/blog"
+            routerLink="/blog"
             class="footer-link transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0ff] rounded"
             >المدونة</a
           >
         </li>
         <li>
           <a
-            routerLink="/agency/contact"
+            routerLink="/contact"
             class="footer-link transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0ff] rounded"
             >تواصل معنا</a
           >
@@ -397,3 +410,4 @@
     </div>
   }
 </div>
+

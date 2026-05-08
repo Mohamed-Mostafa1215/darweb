@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AgencyService } from '../../../core/services/agency.service';
@@ -11,8 +11,34 @@ import { GlassCardComponent } from '../../../shared/ui/glass-card/glass-card.com
   templateUrl: './contact.component.html',
   styleUrl: './contact.component.css'
 })
-export class ContactComponent {
+export class ContactComponent implements OnInit {
   private agencyService = inject(AgencyService);
+
+  ngOnInit() {
+    const pkg = sessionStorage.getItem('selectedPackage');
+    if (pkg) {
+      this.autoFillBudget(pkg);
+      sessionStorage.removeItem('selectedPackage');
+      // If we auto-filled the budget, we might want to also set a default project type to speed things up
+      if (!this.selectedProject) {
+        if (pkg === 'احترافية') this.selectedProject = 'متجر إلكتروني';
+        else if (pkg === 'متقدمة') this.selectedProject = 'نظام إدارة';
+        else this.selectedProject = 'موقع شركة';
+      }
+      // Skip step 1 if project is selected to jump user to budget / details
+      this.step = 2;
+    }
+  }
+
+  autoFillBudget(pkg: string) {
+    const map: Record<string, string> = {
+      'أساسية':   'أقل من 5,000 جنيه',
+      'احترافية': '5,000 - 10,000 جنيه',
+      'متقدمة':   'أكثر من 10,000 جنيه',
+    };
+    this.selectedBudget = map[pkg] || '';
+  }
+
 
   // Wizard state — plain properties, Default CD, no signals needed
   step = 1;
@@ -36,9 +62,9 @@ export class ContactComponent {
   ];
 
   readonly budgetOptions = [
-    'أقل من 3,000 جنيه',
-    '3,000 - 8,000 جنيه',
-    'أكثر من 8,000 جنيه',
+    'أقل من 5,000 جنيه',
+    '5,000 - 10,000 جنيه',
+    'أكثر من 10,000 جنيه',
     'لست متأكداً (أحتاج استشارة)',
   ];
 
