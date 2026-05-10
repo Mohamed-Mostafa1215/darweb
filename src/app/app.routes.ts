@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
-  // ── Standalone pages (no agency layout) ──
+  // ── Priority Routes (Standalone) ──
   {
     path: 'checkout/:planId',
     loadComponent: () =>
@@ -19,14 +19,8 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./features/checkout/onboarding/onboarding.component').then((c) => c.OnboardingComponent)
   },
-  // Redirect root to agency home
-  {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full',
-  },
 
-  // Agency Landing Pages
+  // ── Agency Landing Pages (Wrapped in Layout) ──
   {
     path: '',
     loadComponent: () =>
@@ -85,17 +79,11 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./features/agency/demo/chameleon-demo.component').then((c) => c.ChameleonDemoComponent),
         data: { title: 'السحر التقني | جرب النظام الخاص بك - DarWeb', description: 'شاهد تجربة حية لكيف سيبدو النظام الخاص بمشروعك.' }
-      },
-      {
-        path: '**',
-        loadComponent: () =>
-          import('./features/agency/not-found/not-found.component').then((c) => c.NotFoundComponent),
-        data: { title: 'الصفحة غير موجودة | DarWeb', description: 'الصفحة التي تبحث عنها غير موجودة.' }
-      },
+      }
     ],
   },
 
-  // Wildcard route (404)
+  // ── Fallback ──
   {
     path: '**',
     redirectTo: 'home',
