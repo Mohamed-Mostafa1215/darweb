@@ -40,7 +40,7 @@ export const PROJECTS_DATA: Project[] = [
     category: 'Web',
     description: 'A modern, full-featured e-commerce platform with sleek UI, social login, product management, and seamless checkout experience.',
     image: 'assets/projects/zayngular.png',
-    liveUrl: 'https://zayngular.vercel.app/home',
+    liveUrl: 'https://zayngular.vercel.app/',
     problem: 'العميل كان يعتمد على فيسبوك فقط، المبيعات تتوقف ليلاً وصعوبة في متابعة الطلبات يدوياً.',
     solution: 'تصميم متجر إلكتروني احترافي متكامل مع بوابات الدفع وتتبع الشحنات أوتوماتيكياً.',
     result: 'مبيعات تعمل 24/7 وزيادة فعلية في الإيرادات بنسبة 40% في أول شهرين.'

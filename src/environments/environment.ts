@@ -1,7 +1,7 @@
 export const environment = {
   production: false,
   projectUrls: [
-    'https://zayngular.vercel.app/home',
+    'https://zayngular.vercel.app/',
     'https://chainpulse-dashboard.vercel.app/',
     'https://nour-potential-unlocked.vercel.app/',
     'https://smile-appointment-arabia.vercel.app/',

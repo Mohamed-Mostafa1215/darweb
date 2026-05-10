@@ -30,14 +30,14 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'home',
-        pathMatch: 'full',
-      },
-      {
-        path: 'home',
         loadComponent: () =>
           import('./features/agency/home/home.component').then((c) => c.HomeComponent),
         data: { title: 'الرئيسية | تصميم متجر إلكتروني ومواقع شركات - DarWeb', description: 'نبني مواقع احترافية وتطبيقات تجارية تُحدث فرقاً حقيقياً.' }
+      },
+      {
+        path: 'home',
+        redirectTo: '',
+        pathMatch: 'full'
       },
       {
         path: 'about',

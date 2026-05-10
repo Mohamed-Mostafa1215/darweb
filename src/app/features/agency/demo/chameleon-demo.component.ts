@@ -68,7 +68,7 @@ export class ChameleonDemoComponent {
   }
 
   onScrollToPricing() {
-    this.router.navigate(['/home'], { fragment: 'pricing' });
+    this.router.navigate(['/'], { fragment: 'pricing' });
   }
 
   onImageClick() {
