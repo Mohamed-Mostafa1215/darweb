@@ -1,5 +1,5 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AgencyService } from '../../../core/services/agency.service';
 import { GlassCardComponent } from '../../../shared/ui/glass-card/glass-card.component';
@@ -13,20 +13,23 @@ import { GlassCardComponent } from '../../../shared/ui/glass-card/glass-card.com
 })
 export class ContactComponent implements OnInit {
   private agencyService = inject(AgencyService);
+  private platformId = inject(PLATFORM_ID);
 
   ngOnInit() {
-    const pkg = sessionStorage.getItem('selectedPackage');
-    if (pkg) {
-      this.autoFillBudget(pkg);
-      sessionStorage.removeItem('selectedPackage');
-      // If we auto-filled the budget, we might want to also set a default project type to speed things up
-      if (!this.selectedProject) {
-        if (pkg === 'احترافية') this.selectedProject = 'متجر إلكتروني';
-        else if (pkg === 'متقدمة') this.selectedProject = 'نظام إدارة';
-        else this.selectedProject = 'موقع شركة';
+    if (isPlatformBrowser(this.platformId)) {
+      const pkg = sessionStorage.getItem('selectedPackage');
+      if (pkg) {
+        this.autoFillBudget(pkg);
+        sessionStorage.removeItem('selectedPackage');
+        // If we auto-filled the budget, we might want to also set a default project type to speed things up
+        if (!this.selectedProject) {
+          if (pkg === 'احترافية') this.selectedProject = 'متجر إلكتروني';
+          else if (pkg === 'متقدمة') this.selectedProject = 'نظام إدارة';
+          else this.selectedProject = 'موقع شركة';
+        }
+        // Skip step 1 if project is selected to jump user to budget / details
+        this.step = 2;
       }
-      // Skip step 1 if project is selected to jump user to budget / details
-      this.step = 2;
     }
   }
 
