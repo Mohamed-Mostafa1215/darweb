@@ -1,6 +1,24 @@
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
+  // ── Standalone pages (no agency layout) ──
+  {
+    path: 'checkout/:planId',
+    loadComponent: () =>
+      import('./features/checkout/checkout.component').then((c) => c.CheckoutComponent),
+    data: { title: 'إتمام الدفع | DarWeb', description: 'أكمل تسجيلك واحجز نظامك الآن.' }
+  },
+  {
+    path: 'thank-you',
+    loadComponent: () =>
+      import('./features/checkout/thank-you/thank-you.component').then((c) => c.ThankYouComponent),
+    data: { title: 'تم الدفع بنجاح! | DarWeb', description: 'شكراً لك، سنبدأ التجهيز فوراً.' }
+  },
+  {
+    path: 'onboarding',
+    loadComponent: () =>
+      import('./features/checkout/onboarding/onboarding.component').then((c) => c.OnboardingComponent)
+  },
   // Redirect root to agency home
   {
     path: '',

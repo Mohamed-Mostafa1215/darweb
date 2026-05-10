@@ -1,0 +1,117 @@
+<div class="ob-root" dir="rtl">
+  <!-- Minimal Logo -->
+  <div class="logo-bar">
+    <div class="logo-mark">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22">
+        <path d="M12 2L2 22h20L12 2zm0 4l6 14H6l6-14z" />
+      </svg>
+    </div>
+    <span class="logo-name">DarWeb</span>
+  </div>
+
+  <main class="ob-container">
+    @if (!submitted()) {
+      <div class="ob-card animate-slide-up">
+        <div class="ob-header">
+          <span class="ob-step">الخطوة الأخيرة</span>
+          <h1 class="ob-title">لنبدأ بناء مشروعك 🚀</h1>
+          <p class="ob-subtitle">أكمل هذه البيانات البسيطة لتمكين فريقنا من بدء العمل فوراً.</p>
+        </div>
+
+        <form (ngSubmit)="submitOnboarding()" class="ob-form">
+          <!-- Project Name -->
+          <div class="field-group">
+            <label class="field-label">اسم المشروع / البراند <span class="required">*</span></label>
+            <input 
+              type="text" 
+              [(ngModel)]="projectName" 
+              name="projectName" 
+              placeholder="مثلاً: متجر السعادة" 
+              class="field-input"
+              required
+            >
+          </div>
+
+          <!-- Domain Preference -->
+          <div class="field-group">
+            <label class="field-label">اسم الدومين المقترح (Domain)</label>
+            <input 
+              type="text" 
+              [(ngModel)]="domainName" 
+              name="domainName" 
+              placeholder="مثلاً: happiness-store.com" 
+              class="field-input"
+            >
+            <small class="field-hint">إذا لم تكن متأكداً، سنقترح عليك الأفضل.</small>
+          </div>
+
+          <!-- Brand Colors -->
+          <div class="field-group">
+            <label class="field-label">الألوان المفضلة للبراند</label>
+            <input 
+              type="text" 
+              [(ngModel)]="brandColors" 
+              name="brandColors" 
+              placeholder="مثلاً: أزرق وأبيض، أو كود ألوان محدد" 
+              class="field-input"
+            >
+          </div>
+
+          <!-- Logo Link -->
+          <div class="field-group">
+            <label class="field-label">رابط اللوجو (إن وجد)</label>
+            <input 
+              type="url" 
+              [(ngModel)]="logoUrl" 
+              name="logoUrl" 
+              placeholder="رابط Google Drive أو صورة" 
+              class="field-input"
+            >
+          </div>
+
+          <!-- Requirements -->
+          <div class="field-group">
+            <label class="field-label">أي ملاحظات أو متطلبات خاصة؟</label>
+            <textarea 
+              [(ngModel)]="requirements" 
+              name="requirements" 
+              placeholder="اكتب أي شيء تود توضيحه لنا..." 
+              class="field-textarea"
+              rows="4"
+            ></textarea>
+          </div>
+
+          @if (validationError()) {
+            <div class="error-msg animate-shake">{{ validationError() }}</div>
+          }
+
+          <button 
+            type="submit" 
+            class="ob-submit-btn" 
+            [class.loading]="submitting()"
+            [disabled]="submitting()"
+          >
+            @if (submitting()) {
+              <span class="spinner"></span>
+              <span>جاري الإرسال...</span>
+            } @else {
+              <span>بدء تنفيذ المشروع الآن ⚡</span>
+            }
+          </button>
+        </form>
+      </div>
+    } @else {
+      <!-- Success State -->
+      <div class="success-state animate-fade-in">
+        <div class="success-icon">✨</div>
+        <h2 class="success-title">شكراً لك!</h2>
+        <p class="success-text">لقد استلمنا كافة البيانات. سيقوم مدير المشاريع بالتواصل معك عبر الواتساب خلال الـ 24 ساعة القادمة لبدء أولى خطوات التنفيذ.</p>
+        <button (click)="router.navigate(['/'])" class="back-home-btn">العودة للرئيسية</button>
+      </div>
+    }
+  </main>
+
+  <footer class="ob-footer">
+    <p>جميع بياناتك مشفرة وآمنة تماماً.</p>
+  </footer>
+</div>

@@ -92,5 +92,10 @@ export class HomeComponent implements OnInit {
   scrollToContact() {
     this.router.navigate(['/contact']);
   }
+
+  /** ينتقل مباشرة لصفحة الدفع */
+  goToCheckout(planId: string) {
+    this.router.navigate(['/checkout', planId]);
+  }
 }
 

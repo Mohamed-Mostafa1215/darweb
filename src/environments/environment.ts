@@ -14,4 +14,5 @@ export const environment = {
   },
   contactEmail: 'hello@webdev.com',
   companyLocation: 'San Francisco, CA',
+  apiUrl: 'http://localhost:5035/api' // Match your ASP.NET Backend Port
 };

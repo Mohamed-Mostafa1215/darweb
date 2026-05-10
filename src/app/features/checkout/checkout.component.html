@@ -1,0 +1,330 @@
+<!-- ══════════════════════════════════════════════════
+     CHECKOUT PAGE — Zero-distraction, Split Layout
+     ══════════════════════════════════════════════════ -->
+
+<!-- Not Found State -->
+@if (notFound) {
+  <div class="checkout-root not-found-state">
+    <div class="nf-box">
+      <div class="nf-icon">🔍</div>
+      <h1 class="nf-title">الباقة غير موجودة</h1>
+      <p class="nf-sub">يبدو أن هذا الرابط لم يعد صالحاً. تواصل معنا لنساعدك في اختيار الباقة المناسبة.</p>
+      <a href="/contact" class="nf-btn">ابدأ مشروعك →</a>
+    </div>
+  </div>
+}
+
+<!-- Main Checkout UI -->
+@if (!notFound && plan) {
+<div class="checkout-root" dir="rtl">
+
+  <!-- ── Secure Top Bar ── -->
+  <div class="secure-bar">
+    <span class="secure-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="14" height="14">
+        <path fill-rule="evenodd" d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3c0-2.9-2.35-5.25-5.25-5.25zm3.75 8.25v-3a3.75 3.75 0 10-7.5 0v3h7.5z" clip-rule="evenodd"/>
+      </svg>
+    </span>
+    <span>مدفوعاتك مشفرة ومؤمنة بالكامل — جلسة آمنة 256-bit SSL</span>
+  </div>
+
+  <!-- ── Mini Logo Bar ── -->
+  <div class="logo-bar">
+    <div class="logo-mark">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22">
+        <path d="M12 2L2 22h20L12 2zm0 4l6 14H6l6-14z" />
+      </svg>
+    </div>
+    <span class="logo-name">DarWeb</span>
+  </div>
+
+  <!-- ── Split Layout ── -->
+  <main class="checkout-main">
+
+    <!-- ═══════════ RIGHT: Order Summary ═══════════ -->
+    <section class="order-summary" aria-label="ملخص الطلب">
+
+      <div class="summary-header">
+        <span class="summary-badge">ملخص التعاقد</span>
+        <h1 class="summary-title">{{ plan.title }}</h1>
+        <p class="summary-subtitle">{{ plan.subtitle }}</p>
+        @if (plan.badge) {
+          <span class="plan-badge">⭐ {{ plan.badge }}</span>
+        }
+      </div>
+
+      <!-- Features Checklist -->
+      <ul class="features-list" aria-label="مميزات الباقة">
+        @for (feature of plan.features; track feature) {
+          <li class="feature-item">
+            <span class="check-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
+                <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd"/>
+              </svg>
+            </span>
+            <span>{{ feature }}</span>
+          </li>
+        }
+      </ul>
+
+      <!-- Pricing Breakdown -->
+      <div class="pricing-box">
+        <div class="pricing-row">
+          <span class="pricing-label">رسوم التجهيز</span>
+          <span class="pricing-value">{{ plan.price | number }} {{ plan.currency }}</span>
+        </div>
+        <div class="pricing-row">
+          <span class="pricing-label">رسوم إضافية مخفية</span>
+          <span class="pricing-zero">
+            <span class="strikethrough">100 {{ plan.currency }}</span>
+            <span class="zero-badge">0 ج.م</span>
+          </span>
+        </div>
+        <div class="pricing-divider"></div>
+        <div class="pricing-row total-row">
+          <span class="total-label">الإجمالي المطلوب الآن</span>
+          <span class="total-value">{{ plan.price | number }} {{ plan.currency }}</span>
+        </div>
+      </div>
+
+      <!-- Guarantee Box -->
+      <div class="guarantee-box" role="note" aria-label="ضمان الجودة">
+        <div class="guarantee-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="22" height="22">
+            <path fill-rule="evenodd" d="M12.516 2.17a.75.75 0 00-1.032 0 11.209 11.209 0 01-7.877 3.08.75.75 0 00-.722.515A12.74 12.74 0 002.25 9.75c0 5.942 4.064 10.933 9.563 12.348a.749.749 0 00.374 0c5.499-1.415 9.563-6.406 9.563-12.348 0-1.39-.223-2.73-.635-3.985a.75.75 0 00-.722-.516l-.143.001c-2.996 0-5.717-1.17-7.734-3.08z" clip-rule="evenodd"/>
+          </svg>
+        </div>
+        <div class="guarantee-text">
+          <strong class="guarantee-title">ضمان الشفافية الكاملة 🛡️</strong>
+          <p>هذه الدفعة هي رسوم تجهيز غير مستردة لضمان الجدية. <strong>لا يتم تحصيل أي مبالغ أخرى</strong> إلا بعد استلامك للنظام وتأكدك من عمله بنسبة 100%.</p>
+        </div>
+      </div>
+
+      <!-- Need Help -->
+      <a [href]="getWhatsAppLink()" target="_blank" rel="noopener" class="help-link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+        </svg>
+        هل لديك سؤال؟ تواصل معنا على واتساب
+      </a>
+    </section>
+
+    <!-- ═══════════ LEFT: Payment Form ═══════════ -->
+    <section class="payment-form-section" aria-label="نموذج الدفع">
+
+      <!-- Trust Badges -->
+      <div class="trust-badges">
+        <div class="trust-badge">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20" class="trust-shield">
+            <path fill-rule="evenodd" d="M12.516 2.17a.75.75 0 00-1.032 0 11.209 11.209 0 01-7.877 3.08.75.75 0 00-.722.515A12.74 12.74 0 002.25 9.75c0 5.942 4.064 10.933 9.563 12.348a.749.749 0 00.374 0c5.499-1.415 9.563-6.406 9.563-12.348 0-1.39-.223-2.73-.635-3.985a.75.75 0 00-.722-.516l-.143.001c-2.996 0-5.717-1.17-7.734-3.08z" clip-rule="evenodd"/>
+          </svg>
+          <span>PCI DSS Secure</span>
+        </div>
+        <div class="card-logos" aria-label="طرق الدفع المقبولة">
+          <span class="card-logo visa" aria-label="Visa">VISA</span>
+          <span class="card-logo mc" aria-label="Mastercard">MC</span>
+          <span class="card-logo vf" aria-label="Vodafone Cash">VF Cash</span>
+        </div>
+      </div>
+
+      <h2 class="form-title">بيانات التعاقد</h2>
+
+      <!-- Validation Error -->
+      @if (validationError()) {
+        <div class="validation-error" role="alert">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="18" height="18">
+            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
+          </svg>
+          {{ validationError() }}
+        </div>
+      }
+
+      @if (!submitted()) {
+      <form (submit)="$event.preventDefault(); submitPayment()" novalidate class="payment-form">
+
+        <!-- Personal Info -->
+        <div class="field-group">
+          <label for="client-name" class="field-label">الاسم الكريم <span class="required">*</span></label>
+          <input
+            id="client-name"
+            type="text"
+            [(ngModel)]="clientName"
+            name="clientName"
+            placeholder="محمد أحمد"
+            class="field-input"
+            autocomplete="name"
+            required
+          />
+        </div>
+
+        <div class="field-group">
+          <label for="client-email" class="field-label">البريد الإلكتروني <span class="required">*</span></label>
+          <input
+            id="client-email"
+            type="email"
+            [(ngModel)]="clientEmail"
+            name="clientEmail"
+            placeholder="example@email.com"
+            class="field-input"
+            dir="ltr"
+            autocomplete="email"
+            required
+          />
+        </div>
+
+        <div class="field-group">
+          <label for="client-phone" class="field-label">رقم الواتساب <span class="required">*</span></label>
+          <input
+            id="client-phone"
+            type="tel"
+            [(ngModel)]="clientPhone"
+            name="clientPhone"
+            placeholder="01xxxxxxxxx"
+            class="field-input"
+            dir="ltr"
+            autocomplete="tel"
+            required
+          />
+        </div>
+
+        <!-- Payment Method -->
+        <div class="field-group">
+          <label class="field-label">اختر وسيلة الدفع <span class="required">*</span></label>
+          <div class="payment-methods" role="radiogroup" aria-label="طرق الدفع">
+
+            <label class="method-option" [class.selected]="paymentMethod === 'card'">
+              <input type="radio" [(ngModel)]="paymentMethod" name="paymentMethod" value="card" class="sr-only"/>
+              <span class="method-radio"></span>
+              <span class="method-icon">💳</span>
+              <span class="method-text">
+                <strong>بطاقة بنكية (فيزا / ماستركارد)</strong>
+                <small>دفع آمن ومباشر</small>
+              </span>
+            </label>
+
+            <label class="method-option" [class.selected]="paymentMethod === 'instapay'">
+              <input type="radio" [(ngModel)]="paymentMethod" name="paymentMethod" value="instapay" class="sr-only"/>
+              <span class="method-radio"></span>
+              <span class="method-icon">⚡</span>
+              <span class="method-text">
+                <strong>تطبيق InstaPay</strong>
+                <small>تحويل لحظي مباشر</small>
+              </span>
+            </label>
+
+            <label class="method-option" [class.selected]="paymentMethod === 'wallet'">
+              <input type="radio" [(ngModel)]="paymentMethod" name="paymentMethod" value="wallet" class="sr-only"/>
+              <span class="method-radio"></span>
+              <span class="method-icon">📱</span>
+              <span class="method-text">
+                <strong>محافظ إلكترونية (فودافون كاش ..إلخ)</strong>
+                <small>أو أي محفظة موبايل</small>
+              </span>
+            </label>
+
+          </div>
+        </div>
+
+        <!-- Card Input Simulation (Only shown if NOT Paymob iframe) -->
+        @if (paymentMethod === 'card' && !showIframe()) {
+          <div class="card-simulation animate-fade-in">
+             <!-- Placeholder for card info before calling Paymob -->
+             <p class="text-xs text-gray-400 text-center">بمجرد الضغط على تأكيد، سيتم فتح نافذة الدفع الآمنة من Paymob لإدخال بيانات بطاقتك.</p>
+          </div>
+        }
+
+        <!-- InstaPay Info & Input -->
+        @if (paymentMethod === 'instapay') {
+          <div class="method-details-box animate-fade-in">
+            <div class="instruction-badge">برجاء التحويل لعنوان إنستاباي التالي:</div>
+            <div class="copy-box">
+              <span class="copy-val">01152597819@instapay</span>
+              <span class="copy-hint">Mohamed Mostafa</span>
+            </div>
+            <div class="field-group mt-4">
+              <label class="field-label text-xs">أدخل عنوان إنستاباي الخاص بك (للتأكيد)</label>
+              <input type="text" [(ngModel)]="paymentDetail" name="paymentDetail" placeholder="name@instapay" class="field-input">
+            </div>
+          </div>
+        }
+
+        <!-- Wallet Info & Input -->
+        @if (paymentMethod === 'wallet') {
+          <div class="method-details-box animate-fade-in">
+            <div class="instruction-badge">برجاء التحويل لرقم المحفظة التالي:</div>
+            <div class="copy-box">
+              <span class="copy-val">01152597819</span>
+              <span class="copy-hint">فودافون كاش - محمد مصطفى</span>
+            </div>
+            <div class="field-group mt-4">
+              <label class="field-label text-xs">أدخل رقم المحفظة الذي قمت بالتحويل منه</label>
+              <input type="text" [(ngModel)]="paymentDetail" name="paymentDetail" placeholder="01xxxxxxxxx" class="field-input">
+            </div>
+          </div>
+        }
+
+        <!-- CTA Button -->
+        <button
+          type="submit"
+          class="cta-submit"
+          [class.loading]="submitting()"
+          [disabled]="submitting()"
+          id="checkout-submit-btn"
+        >
+          @if (submitting()) {
+            <span class="btn-spinner"></span>
+            <span>جاري تأمين الاتصال...</span>
+          } @else {
+            <span>تأكيد وبدء التجهيز 🚀</span>
+          }
+        </button>
+
+        <p class="form-footer-note">
+          بالضغط على الزر، أنت توافق على شروط الخدمة وسياسة الدفع الخاصة بـ DarWeb.
+        </p>
+      </form>
+      } @else {
+        <!-- Success State Overlay -->
+        <div class="success-state animate-fade-in" style="text-align: center; padding: 40px 0;">
+          <div class="success-icon" style="font-size: 64px; margin-bottom: 20px;">✅</div>
+          <h2 style="color: #0ff; font-size: 24px; font-weight: 800; margin-bottom: 10px;">تم تأكيد طلبك!</h2>
+          <p style="color: #8da8b8;">جاري توجيهك لصفحة استلام المشروع وإصدار الإيصال...</p>
+        </div>
+      }
+
+      <!-- Paymob Iframe Modal -->
+      @if (showIframe()) {
+        <div class="paymob-overlay animate-fade-in">
+          <div class="paymob-modal">
+            <div class="modal-header">
+              <div class="flex flex-col">
+                <h3>تأمين الدفع عبر Paymob</h3>
+                <small class="text-[10px] text-gray-400">لا تغلق هذه الصفحة حتى انتهاء الدفع</small>
+              </div>
+              <div class="flex gap-2">
+                <button (click)="proceedToSuccess()" class="done-btn">لقد أتممت الدفع بنجاح ✅</button>
+                <button (click)="showIframe.set(false)" class="close-modal" type="button">✕</button>
+              </div>
+            </div>
+            <iframe 
+              [src]="paymobIframeUrl()!" 
+              class="paymob-iframe"
+              frameborder="0"
+            ></iframe>
+          </div>
+        </div>
+      }
+
+    </section>
+  </main>
+
+  <!-- ── Minimal Footer ── -->
+  <footer class="checkout-footer">
+    <p>© 2026 DarWeb — جميع الحقوق محفوظة</p>
+    <a [href]="getWhatsAppLink()" target="_blank" rel="noopener" class="footer-wa">
+      💬 تواصل معنا على واتساب
+    </a>
+  </footer>
+
+</div>
+}

@@ -14,4 +14,5 @@ export const environment = {
   },
   contactEmail: 'hello@webdev.com',
   companyLocation: 'San Francisco, CA',
+  apiUrl: 'https://api.darweb.com/api' // Replace with your production API URL
 };
