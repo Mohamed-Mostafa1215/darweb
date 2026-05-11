@@ -1,0 +1,90 @@
+:host {
+  display: block;
+}
+
+.booking-widget {
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(148, 163, 184, 0.1);
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  color: #f8fafc;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 20px var(--primary-glow);
+  font-family: inherit;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* Header */
+.widget-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(148, 163, 184, 0.1); }
+.clinic-logo { font-size: 2rem; background: rgba(255,255,255,0.05); width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border-radius: 1rem; }
+.clinic-info h3 { margin: 0 0 0.25rem; font-size: 1.25rem; font-weight: 700; color: #fff; }
+.clinic-info p { margin: 0; font-size: 0.875rem; color: #94a3b8; }
+
+/* Steps */
+.steps-indicator { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; }
+.step { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; position: relative; z-index: 2; cursor: pointer; opacity: 0.5; transition: opacity 0.3s; flex: 1; }
+.step.active { opacity: 1; }
+.step .circle { width: 32px; height: 32px; border-radius: 50%; background: rgba(30, 41, 59, 0.5); border: 2px solid rgba(148, 163, 184, 0.1); display: flex; align-items: center; justify-content: center; font-size: 0.875rem; font-weight: 700; transition: all 0.3s; }
+.step.active .circle { background: var(--primary); border-color: var(--primary); color: #000; box-shadow: 0 0 15px var(--primary-glow); }
+.step span { font-size: 0.7rem; font-weight: 600; text-align: center; white-space: nowrap; }
+.steps-indicator .line { flex: 1; height: 2px; background: rgba(148, 163, 184, 0.1); margin: 0 5px; position: relative; top: -10px; }
+.steps-indicator .line.active { background: var(--primary); box-shadow: 0 0 10px var(--primary-glow); }
+
+/* Layout */
+.step-container { min-height: 300px; display: flex; flex-direction: column; }
+.step-title { font-size: 1.1rem; margin-bottom: 1.5rem; color: #fff; text-align: center;}
+
+/* Grid Type */
+.grid-type { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 0.75rem; }
+.grid-card { flex: 1; padding: 1.5rem 0.5rem; background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(148, 163, 184, 0.1); border-radius: 1rem; cursor: pointer; transition: all 0.2s; }
+.grid-card:hover { border-color: var(--primary); background: rgba(255,255,255,0.05); }
+.grid-card.selected { border-color: var(--primary); background: var(--primary-glow); box-shadow: 0 0 15px var(--primary-glow); color: var(--primary); }
+
+/* List Type */
+.list-type { display: flex; flex-direction: column; gap: 0.75rem; }
+.list-item { display: flex; align-items: center; justify-content: space-between; padding: 1rem; background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(148, 163, 184, 0.1); border-radius: 1rem; cursor: pointer; transition: all 0.2s; }
+.list-item:hover { border-color: var(--primary); }
+.list-item.selected { border-color: var(--primary); background: var(--primary-glow); box-shadow: 0 0 15px var(--primary-glow); }
+
+/* Radio Circle */
+.radio-circle { width: 20px; height: 20px; border-radius: 50%; border: 2px solid #94a3b8; position: relative; }
+.list-item.selected .radio-circle { border-color: var(--primary); }
+.list-item.selected .radio-circle::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 10px; height: 10px; background: var(--primary); border-radius: 50%; }
+
+/* Color Picker Type */
+.color-circle { width: 45px; height: 45px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; transition: all 0.2s; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+.color-circle.selected { border-color: var(--primary); transform: scale(1.1); box-shadow: 0 0 10px var(--primary-glow); }
+
+/* Counter Type */
+.area-selector { display: flex; align-items: center; justify-content: space-between; background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(148, 163, 184, 0.1); border-radius: 1rem; padding: 0.75rem; }
+.area-selector button { width: 50px; height: 50px; border-radius: 0.75rem; border: none; background: rgba(255,255,255,0.05); color: #fff; font-size: 1.5rem; font-weight: bold; cursor: pointer; transition: all 0.2s; }
+.area-selector button:hover { background: var(--primary); color: #000; }
+.area-value { font-size: 1.5rem; font-weight: bold; color: #fff; }
+
+/* Form Type */
+.custom-input { width: 100%; padding: 1rem; background: rgba(0,0,0,0.2); border: 1px solid rgba(148, 163, 184, 0.1); border-radius: 0.75rem; color: #fff; font-size: 1rem; outline: none; transition: border-color 0.2s; }
+.custom-input:focus { border-color: var(--primary); box-shadow: 0 0 0 2px var(--primary-glow); }
+
+/* Summary */
+.summary-card { background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(148, 163, 184, 0.1); border-radius: 1rem; padding: 2rem 1.5rem; margin-bottom: 1.5rem; }
+.detail-row { display: flex; justify-content: space-between; margin-bottom: 0.75rem; font-size: 0.95rem; }
+.detail-row .label { color: #94a3b8; }
+.detail-row .value { color: #fff; font-weight: 600; }
+.success-state { text-align: center; padding: 2rem 0; }
+.success-icon { font-size: 4rem; margin-bottom: 1rem; }
+
+/* Buttons */
+.actions-row { display: grid; grid-template-columns: 1fr 2fr; gap: 0.75rem; margin-top: auto; padding-top: 1.5rem; }
+.primary-btn { width: 100%; padding: 1rem; background: var(--primary); color: #000; border: none; border-radius: 0.75rem; font-size: 1rem; font-weight: 700; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 0.5rem; transition: all 0.2s; min-height: 56px; }
+.primary-btn:not([disabled]):hover { transform: translateY(-2px); box-shadow: 0 5px 15px var(--primary-glow); }
+.primary-btn[disabled] { background: rgba(30, 41, 59, 0.5); color: #94a3b8; cursor: not-allowed; opacity: 0.5; }
+.secondary-btn { padding: 1rem; background: transparent; color: #f8fafc; border: 1px solid rgba(148, 163, 184, 0.1); border-radius: 0.75rem; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.2s; min-height: 56px; }
+.secondary-btn:hover { background: rgba(30, 41, 59, 0.5); }
+.whatsapp-btn { width: 100%; padding: 1rem; background: #25D366; color: #fff; border: none; border-radius: 0.75rem; font-size: 1rem; font-weight: 700; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 0.5rem; transition: all 0.2s; box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3); min-height: 56px; }
+.whatsapp-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4); }
+
+/* Animations */
+.fade-in { animation: fadeIn 0.3s ease forwards; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }

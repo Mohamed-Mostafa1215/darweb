@@ -37,6 +37,13 @@ export class App implements OnInit {
       this.metaService.updateTag({ name: 'description', content: desc });
       this.metaService.updateTag({ property: 'og:description', content: desc });
       this.metaService.updateTag({ name: 'twitter:description', content: desc });
+
+      // Smooth scroll to top on navigation (unless there's an anchor fragment)
+      if (typeof window !== 'undefined' && !this.router.url.includes('#')) {
+        setTimeout(() => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 100); // Slight delay ensures DOM is rendered before scrolling
+      }
     });
   }
 }

@@ -18,11 +18,18 @@
   </div>
 
   <!-- Sector Selector -->
-  <div class="sector-selector">
-    <button [class.active]="selectedSector() === 'ecommerce'" (click)="selectSector('ecommerce')">🛒 المتاجر الإلكترونية</button>
-    <button [class.active]="selectedSector() === 'clinic'" (click)="selectSector('clinic')">🩺 العيادات الطبية</button>
-    <button [class.active]="selectedSector() === 'decor'" (click)="selectSector('decor')">🛋️ الديكور والمقاولات</button>
-    <button [class.active]="selectedSector() === 'trade'" (click)="selectSector('trade')">🤝 التجارة والوسطاء</button>
+  <div class="sector-selector hide-scrollbar flex overflow-x-auto gap-2 pb-4 mb-4">
+    @for (niche of niches; track niche.id) {
+      <button 
+        [class.active]="selectedNicheId() === niche.id" 
+        (click)="selectSector(niche.id)"
+        class="whitespace-nowrap px-4 py-2 rounded-lg font-bold border transition-all shrink-0"
+        [style.border-color]="selectedNicheId() === niche.id ? niche.themeColor : 'rgba(255,255,255,0.1)'"
+        [style.background-color]="selectedNicheId() === niche.id ? niche.themeColor + '20' : 'transparent'"
+        [style.color]="selectedNicheId() === niche.id ? niche.themeColor : '#fff'">
+        {{ niche.icon }} {{ niche.title }}
+      </button>
+    }
   </div>
 
   <!-- Main Showcase Container -->
@@ -30,40 +37,28 @@
     
     <!-- Text & Features Side -->
     <div class="showcase-content">
-      <div class="project-badge">مستوحى من: {{ currentDemo().projectName }}</div>
-      <h3 class="showcase-title">{{ currentDemo().title }}</h3>
-      <p class="showcase-subtitle">{{ currentDemo().subtitle }}</p>
+      <div class="project-badge" [style.color]="currentDemo().themeColor" [style.border-color]="currentDemo().themeColor + '50'" [style.background-color]="currentDemo().themeColor + '10'">
+        مستوحى من: {{ currentDemo().title }}
+      </div>
+      <h3 class="showcase-title text-3xl font-bold mt-4 mb-2 text-white">{{ currentDemo().title }}</h3>
+      <p class="showcase-subtitle text-gray-400 mb-6">{{ currentDemo().subtitle }}</p>
       
-      <ul class="features-list">
-        @for (feature of currentDemo().features; track feature) {
-          <li>
-            <svg class="w-5 h-5 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-            </svg>
-            {{ feature }}
-          </li>
-        }
-      </ul>
-
-      <div class="metrics-grid">
-        @for (metric of currentDemo().metrics; track metric.label) {
-          <div class="metric-box">
-            <div class="metric-value">{{ metric.value }}</div>
-            <div class="metric-label">{{ metric.label }}</div>
-          </div>
-        }
+      <!-- You can add metrics or static features here if needed, or keep it clean -->
+      <div class="p-6 rounded-2xl bg-slate-800/50 border border-slate-700 mt-8 hidden md:block">
+        <h4 class="text-xl font-bold mb-3 text-white">لماذا هذا النظام مثالي لك؟</h4>
+        <ul class="space-y-3 text-gray-300">
+          <li class="flex items-center gap-2"><span class="text-green-400">✓</span> استجابة فورية بدون تحميل</li>
+          <li class="flex items-center gap-2"><span class="text-green-400">✓</span> تجربة مستخدم مخصصة لمجالك</li>
+          <li class="flex items-center gap-2"><span class="text-green-400">✓</span> ربط مباشر وسريع عبر واتساب</li>
+        </ul>
       </div>
     </div>
 
     <!-- Visual Mockup Side -->
     <div class="showcase-visual">
       
-      <div class="mockup-image-container" (click)="onImageClick()" style="cursor: pointer;" title="جرب التفاعل مع النظام!">
-        <img [src]="currentDemo().imageUrl" [alt]="currentDemo().title" class="mockup-image" />
-        
-        <!-- Animated glow overlay -->
-        <div class="mockup-glow"></div>
-      </div>
+      <!-- Single Dynamic Widget Component! -->
+      <app-dynamic-widget [config]="currentDemo()"></app-dynamic-widget>
 
     </div>
   </div>
